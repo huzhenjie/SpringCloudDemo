@@ -1,4 +1,4 @@
-package com.scrat.background.model;
+package com.scrat.background.module.queue;
 
 import java.io.Serializable;
 

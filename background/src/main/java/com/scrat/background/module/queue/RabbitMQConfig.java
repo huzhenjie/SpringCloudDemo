@@ -1,4 +1,4 @@
-package com.scrat.background.config;
+package com.scrat.background.module.queue;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
