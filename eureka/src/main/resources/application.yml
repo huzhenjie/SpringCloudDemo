@@ -1,0 +1,18 @@
+server:
+  port: 18000
+
+spring:
+  application:
+    name: eureka-server
+  jackson:
+    property-naming-strategy: CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES
+  profiles:
+    active: dev
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+      default-zone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  instance:
+    hostname: localhost

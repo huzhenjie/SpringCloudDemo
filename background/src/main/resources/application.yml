@@ -1,0 +1,16 @@
+server:
+  port: 18001
+
+spring:
+  application:
+    name: background-server
+  profiles:
+    active: dev
+
+info:
+  app:
+    name: ${spring.application.name}
+    port: ${server.port}
+    active: ${spring.profiles.active}
+    eruaka-zone: ${eureka.client.serviceUrl.defaultZone}
+    java: ${java.version}
