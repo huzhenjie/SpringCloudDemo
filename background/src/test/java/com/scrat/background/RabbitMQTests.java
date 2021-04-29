@@ -12,6 +12,6 @@ class RabbitMQTests {
     private MyQueueSender myQueueSender;
     @Test
     void testSend() {
-        myQueueSender.send(new QueueData<String>().setType(123).setData("fuck"));
+        myQueueSender.send(new QueueData<String>().setType(123).setData("Hello"));
     }
 }

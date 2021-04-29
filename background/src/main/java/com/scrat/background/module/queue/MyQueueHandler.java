@@ -13,11 +13,11 @@ public class MyQueueHandler {
     @RabbitHandler
     @RabbitListener(queues = RabbitMQConfig.QUEUE_NAME)
     public void handleCallback(QueueData<String> data) {
-        log.info("开始消费");
+        log.info("handle queue callback");
         try {
             System.out.println(data);
         } catch (Exception e) {
-            log.error("消费失败", e);
+            log.error("Something wrong", e);
         }
     }
 }
