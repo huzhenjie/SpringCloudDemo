@@ -4,8 +4,14 @@ server:
 spring:
   application:
     name: background-server
+  jackson:
+    property-naming-strategy: CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES # 请求参数下划线转驼峰命名
   profiles:
     active: dev
+  task:
+    execution:
+      shutdown:
+        await-termination: true # 应用关闭时，是否等待定时任务执行完成
 
 info:
   app:
