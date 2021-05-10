@@ -10,6 +10,9 @@ import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Configuration
 public class RabbitMQConfig {
     public static final String QUEUE_NAME = "my_queue";
@@ -29,19 +32,24 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public Queue registerBookQueue() {
-        return new Queue(QUEUE_NAME, true);
+    public Queue queue() {
+        boolean durable = true; // true if we are declaring a durable queue (the queue will survive a server restart)
+        boolean exclusive = false; // true if we are declaring an exclusive queue (the queue will only be used by the declarer's connection
+        boolean autoDelete = false; // true if the server should delete the queue when it is no longer in use
+        Map<String, Object> args = new HashMap<>();
+        args.put("x-max-priority", 100);
+        return new Queue(QUEUE_NAME, durable, exclusive, autoDelete, args);
     }
 
     @Bean
-    public TopicExchange registerBookTopicExchange() {
+    public TopicExchange exchange() {
         return new TopicExchange(EXCHANGE_NAME);
     }
 
     @Bean
-    public Binding registerBookBinding() {
-        return BindingBuilder.bind(registerBookQueue())
-                .to(registerBookTopicExchange())
+    public Binding registerBookBinding(Queue queue, TopicExchange exchange) {
+        return BindingBuilder.bind(queue)
+                .to(exchange)
                 .with(ROUTING_KEY);
     }
 }

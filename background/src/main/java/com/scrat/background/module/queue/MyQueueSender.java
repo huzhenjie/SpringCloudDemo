@@ -18,18 +18,16 @@ public class MyQueueSender {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public boolean send(QueueData<String> data) {
+    public void sendSimpleMsg(QueueData<String> data) {
         if (data == null) {
             log.error("消息发送失败");
-            return false;
+            return;
         }
 
         try {
             this.rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, RabbitMQConfig.ROUTING_KEY, data);
-            return true;
         } catch (AmqpException e) {
             log.error("消息发送失败");
-            return false;
         }
     }
 }
