@@ -20,14 +20,14 @@ public class MyQueueSender {
 
     public void sendSimpleMsg(QueueData<String> data) {
         if (data == null) {
-            log.error("消息发送失败");
+            log.error("Push RabbitMQ message fail");
             return;
         }
 
         try {
             this.rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, RabbitMQConfig.ROUTING_KEY, data);
         } catch (AmqpException e) {
-            log.error("消息发送失败");
+            log.error("Push RabbitMQ message fail", e);
         }
     }
 }
