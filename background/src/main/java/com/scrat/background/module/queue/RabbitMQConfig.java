@@ -31,6 +31,9 @@ public class RabbitMQConfig {
         return new Jackson2JsonMessageConverter();
     }
 
+    /**
+     * Create an AMQP queue
+     */
     @Bean
     public Queue queue() {
         boolean durable = true; // true if we are declaring a durable queue (the queue will survive a server restart)
@@ -41,13 +44,19 @@ public class RabbitMQConfig {
         return new Queue(QUEUE_NAME, durable, exclusive, autoDelete, args);
     }
 
+    /**
+     * Create a topic exchange
+     */
     @Bean
     public TopicExchange exchange() {
         return new TopicExchange(EXCHANGE_NAME);
     }
 
+    /**
+     * Bind the queue and the exchange together
+     */
     @Bean
-    public Binding registerBookBinding(Queue queue, TopicExchange exchange) {
+    public Binding binding(Queue queue, TopicExchange exchange) {
         return BindingBuilder.bind(queue)
                 .to(exchange)
                 .with(ROUTING_KEY);
