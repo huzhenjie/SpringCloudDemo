@@ -20,6 +20,6 @@ public class ApplicationContextProvider implements ApplicationContextAware {
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        log.info("服务启动成功，请访问 http://{}:{}", envConfig.getServerIp(), envConfig.getPort());
+        log.info("Server running at:\thttp://{}:{}", envConfig.getServerIp(), envConfig.getPort());
     }
 }
