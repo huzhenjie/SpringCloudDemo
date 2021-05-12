@@ -1,43 +1,46 @@
-## Getting started
+## RabbitMQ
 
 [RabbitMQ Tutorials](https://www.rabbitmq.com/getstarted.html)
 
-### Install
+* Install
 
 ```
 $ brew update
 $ brew install rabbitmq
 ```
 
-### Start RabbitMQ server
+* Start server
 
 ```
 $ rabbitmq-server
 ```
 
-### Visit the manager index
+* Management UI access
 
-[RabbitMQ Management](http://localhost:15672)
+> The management UI can be accessed using a Web browser at `http://{node-hostname}:15672/`.  
+> For example [http://localhost:15672](http://localhost:15672)  
+> Default username: `guest`  
+> Default password: `guest`  
 
-### Default account
-
-> username: guest  
-> password: guest
-
-### Default RabbitMQ port
+* Default tcp port
 
 > 5672
 
-## RabbitMQ Cli
+## Command line tools
 
-### List all users
+* List all users
 
 ```
 $ rabbitmqctl list_users
 ```
 
-### Get the permission info by username `guest`
+* Show the permission info
 
 ```
 $ rabbitmqctl list_user_permissions guest
 ```
+
+* [Read more](https://www.rabbitmq.com/cli.html#overview)
+
+## Use in SpringBoot
+
