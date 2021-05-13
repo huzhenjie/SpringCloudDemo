@@ -17,7 +17,9 @@ import java.util.Map;
 public class RabbitMQConfig {
     public static final String QUEUE_NAME = "my_queue";
     public static final String EXCHANGE_NAME = "my_exchange";
-    public static final String ROUTING_KEY = "all";
+    public static final String ROUTING_KEY_PREFIX = "foo.bar.";
+    public static final String ROUTING_KEY = ROUTING_KEY_PREFIX + "#";
+    public static final int MAX_PRIORITY = 10;
 
     @Bean
     public RabbitTemplate rabbitTemplate(final ConnectionFactory connectionFactory) {
@@ -40,7 +42,7 @@ public class RabbitMQConfig {
         boolean exclusive = false; // true if we are declaring an exclusive queue (the queue will only be used by the declarer's connection
         boolean autoDelete = false; // true if the server should delete the queue when it is no longer in use
         Map<String, Object> args = new HashMap<>();
-        args.put("x-max-priority", 100);
+        args.put("x-max-priority", MAX_PRIORITY);
         return new Queue(QUEUE_NAME, durable, exclusive, autoDelete, args);
     }
 

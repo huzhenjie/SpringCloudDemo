@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyQueueSender {
     private static Logger log = LoggerFactory.getLogger(MyQueueSender.class.getName());
+    private static final String ROUTING_KEY =  RabbitMQConfig.ROUTING_KEY + "priority";
 
     private final RabbitTemplate rabbitTemplate;
 
@@ -25,9 +26,26 @@ public class MyQueueSender {
         }
 
         try {
-            this.rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, RabbitMQConfig.ROUTING_KEY, data);
+            this.rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, ROUTING_KEY, data);
         } catch (AmqpException e) {
             log.error("Push RabbitMQ message fail", e);
         }
+    }
+
+    public void sendPriorityMsg(QueueData<String> data, int priority) {
+        final int finalPriority;
+        if (priority < 0) {
+            log.warn("priority should between 0 and {}", RabbitMQConfig.MAX_PRIORITY);
+            finalPriority = 0;
+        } else if (priority > RabbitMQConfig.MAX_PRIORITY) {
+            log.warn("priority should between 0 and {}", RabbitMQConfig.MAX_PRIORITY);
+            finalPriority = RabbitMQConfig.MAX_PRIORITY;
+        } else {
+            finalPriority = priority;
+        }
+        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, ROUTING_KEY, data, message -> {
+            message.getMessageProperties().setPriority(finalPriority);
+            return message;
+        });
     }
 }
