@@ -42,5 +42,27 @@ $ rabbitmqctl list_user_permissions guest
 
 * [Read more](https://www.rabbitmq.com/cli.html#overview)
 
-## Use in SpringBoot
+## Spring Boot Messaging with RabbitMQ
 
+* Add dependence in `build.gradle`
+
+```groovy
+dependencies {
+    // ...
+    testImplementation 'org.springframework.amqp:spring-rabbit-test'
+}
+```
+
+* Configuration in Spring Boot `application.yml`
+
+```yaml
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    listener:
+      simple:
+        prefetch: 1
+```
