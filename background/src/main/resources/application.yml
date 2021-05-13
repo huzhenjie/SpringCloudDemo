@@ -8,6 +8,10 @@ spring:
     property-naming-strategy: CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES # 请求参数下划线转驼峰命名
   profiles:
     active: dev
+  rabbitmq:
+    listener:
+      simple:
+        prefetch: 1 # 每个消费者可能未完成的最大未确认消息数量
   task:
     execution:
       shutdown:
