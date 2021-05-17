@@ -22,6 +22,8 @@ public class AsyncController {
     @GetMapping("/async")
     public Res<Object> asyncReq() {
         this.asyncService.asyncFutureTask();
+        this.asyncService.asyncFutureTask();
+        this.asyncService.asyncFutureTask();
         return Res.success();
     }
 
