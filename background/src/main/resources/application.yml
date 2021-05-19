@@ -16,11 +16,12 @@ spring:
     execution:
       shutdown:
         await-termination: true # 应用关闭时，是否等待定时任务执行完成
+#      thread-name-prefix: task-
 
 info:
   app:
     name: ${spring.application.name}
     port: ${server.port}
     active: ${spring.profiles.active}
-    eruaka-zone: ${eureka.client.serviceUrl.defaultZone}
+    eruaka-zone: ${eureka.client.service-url.default-zone}
     java: ${java.version}
