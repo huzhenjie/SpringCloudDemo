@@ -1,0 +1,5 @@
+```groovy
+springBoot {
+    buildInfo()
+}
+```

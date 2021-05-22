@@ -1,6 +1,7 @@
-package com.scrat.background.config;
+package com.scrat.background.module.env;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.info.BuildProperties;
 import org.springframework.stereotype.Repository;
 
 import java.net.Inet4Address;
@@ -12,6 +13,12 @@ public class EnvConfig {
     private String active;
     @Value("${server.port}")
     private String port;
+
+    private final BuildProperties buildProperties;
+
+    public EnvConfig(BuildProperties buildProperties) {
+        this.buildProperties = buildProperties;
+    }
 
     public String getActive() {
         return active;
@@ -35,6 +42,14 @@ public class EnvConfig {
 
     public boolean isUnitTest() {
         return "-1".equals(getPort());
+    }
+
+    public String getBuildDescription() {
+        return buildProperties.getGroup() + "."
+                + buildProperties.getArtifact() + ":"
+                + buildProperties.getName() + ":"
+                + buildProperties.getVersion()
+                + " Build at " + buildProperties.getTime().toEpochMilli();
     }
 
     public String getServerIp() {
