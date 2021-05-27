@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: background-server
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jackson:
     property-naming-strategy: CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES # 请求参数下划线转驼峰命名
   profiles:
@@ -23,5 +25,5 @@ info:
     name: ${spring.application.name}
     port: ${server.port}
     active: ${spring.profiles.active}
-    eruaka-zone: ${eureka.client.service-url.default-zone}
+    eureka-zone: ${eureka.client.service-url.default-zone}
     java: ${java.version}

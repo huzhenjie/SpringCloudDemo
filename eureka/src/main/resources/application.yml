@@ -22,5 +22,5 @@ info:
     name: ${spring.application.name}
     port: ${server.port}
     active: ${spring.profiles.active}
-    eruaka-zone: ${eureka.client.service-url.default-zone}
+    eureka-zone: ${eureka.client.service-url.default-zone}
     java: ${java.version}
