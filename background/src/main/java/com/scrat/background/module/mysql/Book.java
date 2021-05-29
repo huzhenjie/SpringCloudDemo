@@ -4,6 +4,7 @@ public class Book {
     private long bookId;
     private String bookName;
     private int price;
+    private int colNotInDb;
 
     public long getBookId() {
         return bookId;
@@ -32,12 +33,22 @@ public class Book {
         return this;
     }
 
+    public int getColNotInDb() {
+        return colNotInDb;
+    }
+
+    public Book setColNotInDb(int colNotInDb) {
+        this.colNotInDb = colNotInDb;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
                 "bookId=" + bookId +
                 ", bookName='" + bookName + '\'' +
                 ", price=" + price +
+                ", colNotInDb=" + colNotInDb +
                 '}';
     }
 }
