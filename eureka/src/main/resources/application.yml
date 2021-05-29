@@ -13,7 +13,7 @@ eureka:
     fetch-registry: false
     register-with-eureka: false
     service-url:
-      default-zone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
   instance:
     hostname: localhost
 
@@ -22,5 +22,6 @@ info:
     name: ${spring.application.name}
     port: ${server.port}
     active: ${spring.profiles.active}
+    hostname: ${eureka.instance.hostname}
     eureka-zone: ${eureka.client.service-url.default-zone}
     java: ${java.version}
