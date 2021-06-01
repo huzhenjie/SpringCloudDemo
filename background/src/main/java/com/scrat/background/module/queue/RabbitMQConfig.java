@@ -1,17 +1,11 @@
 package com.scrat.background.module.queue;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Configuration
 public class RabbitMQConfig {
@@ -38,12 +32,7 @@ public class RabbitMQConfig {
      */
     @Bean
     public Queue queue() {
-        boolean durable = true; // true if we are declaring a durable queue (the queue will survive a server restart)
-        boolean exclusive = false; // true if we are declaring an exclusive queue (the queue will only be used by the declarer's connection
-        boolean autoDelete = false; // true if the server should delete the queue when it is no longer in use
-        Map<String, Object> args = new HashMap<>();
-        args.put("x-max-priority", MAX_PRIORITY);
-        return new Queue(QUEUE_NAME, durable, exclusive, autoDelete, args);
+        return QueueBuilder.durable(QUEUE_NAME).maxPriority(MAX_PRIORITY).build();
     }
 
     /**
@@ -51,7 +40,7 @@ public class RabbitMQConfig {
      */
     @Bean
     public TopicExchange exchange() {
-        return new TopicExchange(EXCHANGE_NAME);
+        return ExchangeBuilder.topicExchange(EXCHANGE_NAME).build();
     }
 
     /**
