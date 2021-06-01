@@ -83,7 +83,7 @@ rabbitmq-plugins enable rabbitmq_delayed_message_exchange
 ```groovy
 dependencies {
     // ...
-    testImplementation 'org.springframework.amqp:spring-rabbit-test'
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
 }
 ```
 
