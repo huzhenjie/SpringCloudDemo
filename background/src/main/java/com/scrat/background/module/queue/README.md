@@ -40,7 +40,41 @@ $ rabbitmqctl list_users
 $ rabbitmqctl list_user_permissions guest
 ```
 
+* Add user
+
+```shell script
+rabbitmqctl add_user username password
+```
+
+* Add permission
+
+```shell script
+rabbitmqctl set_user_tags username administrator
+rabbitmqctl set_permissions -p / username ".*" ".*" ".*"
+```
+
 * [Read more](https://www.rabbitmq.com/cli.html#overview)
+
+## Bind to all network interfaces
+
+```shell script
+vim /usr/local/etc/rabbitmq/rabbitmq-env.conf 
+```
+
+* set `NODE_IP_ADDRESS`
+
+```
+NODE_IP_ADDRESS=
+```
+
+## Enable delayed message
+
+* [Read more](https://github.com/rabbitmq/rabbitmq-delayed-message-exchange)
+
+```shell script
+mv rabbitmq_delayed_message_exchange-3.8.9-0199d11c.ez /usr/local/opt/rabbitmq/plugins/
+rabbitmq-plugins enable rabbitmq_delayed_message_exchange
+```
 
 ## Spring Boot Messaging with RabbitMQ
 
