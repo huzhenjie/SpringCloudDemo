@@ -76,6 +76,16 @@ mv rabbitmq_delayed_message_exchange-3.8.9-0199d11c.ez /usr/local/opt/rabbitmq/p
 rabbitmq-plugins enable rabbitmq_delayed_message_exchange
 ```
 
+## Exchange
+
+> fanout > direct >> topic
+
+![Fanout Exchange](https://images2018.cnblogs.com/blog/174578/201805/174578-20180524175832191-777772730.png)
+
+![Direct Exchange](https://images2018.cnblogs.com/blog/174578/201805/174578-20180524175810062-1941410843.png)
+
+![Topic Exchange](https://images2018.cnblogs.com/blog/174578/201805/174578-20180524175844359-92574693.png)
+
 ## Spring Boot Messaging with RabbitMQ
 
 * Add dependence in `build.gradle`
