@@ -6,6 +6,10 @@ eureka:
 logging:
   level:
     ROOT: info
+    org:
+      springframework:
+        jdbc:
+          core: TRACE
 
 spring:
   datasource:

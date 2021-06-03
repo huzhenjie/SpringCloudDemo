@@ -35,4 +35,11 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/test?characterEncoding=utf8&useSSL=false
     username: your_database_user
     password: your_database_password
+
+logging:
+  level:
+    org:
+      springframework:
+        jdbc:
+          core: TRACE
 ```
