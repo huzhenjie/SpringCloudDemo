@@ -10,6 +10,12 @@ public class Res<T> {
                 .setStatus(200);
     }
 
+    public static <T> Res<T> success(T data) {
+        return new Res<T>()
+                .setData(data)
+                .setStatus(200);
+    }
+
     public static <T> Res<T> error(int code, String msg) {
         return new Res<T>()
                 .setStatus(code)
