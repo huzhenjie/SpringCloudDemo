@@ -20,6 +20,11 @@ spring:
         await-termination: true # 应用关闭时，是否等待定时任务执行完成
 #      thread-name-prefix: task-
 
+http:
+  encrypt:
+    key: wfxAbPXiGMHRCdE7
+    iv: wfxAbPXiGMHRCdE7
+
 info:
   app:
     name: ${spring.application.name}
