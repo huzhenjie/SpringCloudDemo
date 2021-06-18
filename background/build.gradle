@@ -4,8 +4,27 @@ plugins {
     id 'java'
 }
 
+static def getGitVersionCode() {
+    // eg: 36
+    try {
+        return 'git rev-list HEAD --first-parent --count'.execute().text.trim().toInteger()
+    } catch (ignored) {
+        return 1
+    }
+}
+
+static def getGitVersionInfo() {
+    // eg: 60d0ed1
+    return 'git rev-parse --short HEAD'.execute().text.trim()
+}
+
+static def getGitBranch() {
+    // eg: master
+    return 'git symbolic-ref --short -q HEAD'.execute().text.trim()
+}
+
 group = 'com.scrat'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1.' + getGitVersionCode()
 sourceCompatibility = '1.8'
 
 repositories {
