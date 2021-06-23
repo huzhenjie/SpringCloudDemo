@@ -1,7 +1,10 @@
 package com.scrat.background.module.queue;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +19,12 @@ public class RabbitMQConfig {
     public static final int MAX_PRIORITY = 10;
 
     @Bean
+    public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory) {
+        // For dynamic queue
+        return new RabbitAdmin(connectionFactory);
+    }
+
+    @Bean
     public RabbitTemplate rabbitTemplate(final ConnectionFactory connectionFactory) {
         final RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
         rabbitTemplate.setMessageConverter(producerJackson2MessageConverter());
@@ -24,7 +33,9 @@ public class RabbitMQConfig {
 
     @Bean
     public Jackson2JsonMessageConverter producerJackson2MessageConverter() {
-        return new Jackson2JsonMessageConverter();
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+        return new Jackson2JsonMessageConverter(mapper);
     }
 
     /**
