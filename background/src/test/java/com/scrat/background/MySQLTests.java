@@ -64,7 +64,7 @@ public class MySQLTests {
         Book book = new Book()
                 .setBookName("Unit Test")
                 .setPrice(123);
-        Long id = bookDao.addBookGetId(book);
+        long id = bookDao.addBookGetId(book);
         Assert.isTrue(id > 0L, "Add book fail");
         id = bookModelDao.addBookGetId(book);
         Assert.isTrue(id > 0L, "Add book fail");
@@ -126,7 +126,7 @@ public class MySQLTests {
         Book book = new Book()
                 .setBookName("Unit Test")
                 .setPrice(123);
-        Long bookId = bookDao.addBookGetId(book);
+        long bookId = bookDao.addBookGetId(book);
         Assert.isTrue(bookId > 0L, "Add book fail");
 
         boolean deleteSuccess = bookDao.deleteBook(bookId);

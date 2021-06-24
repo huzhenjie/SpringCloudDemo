@@ -30,7 +30,7 @@ public class BookModelDao {
         return affectRow > 0;
     }
 
-    public Long addBookGetId(Book book) {
+    public long addBookGetId(Book book) {
         String sql = "insert ignore into book set book_name=:bookName,price=:price";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         SqlParameterSource sqlParameterSource = new BeanPropertySqlParameterSource(book);
@@ -39,7 +39,7 @@ public class BookModelDao {
         if (num == null) {
             return -1L;
         }
-        return keyHolder.getKey().longValue();
+        return num.longValue();
     }
 
     @Transactional

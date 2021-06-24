@@ -48,7 +48,7 @@ public class BookDao {
         return affectRow > 0;
     }
 
-    public Long addBookGetId(Book book) {
+    public long addBookGetId(Book book) {
         String sql = "insert ignore into book set book_name=?,price=?";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(con -> {
@@ -61,7 +61,7 @@ public class BookDao {
         if (num == null) {
             return -1L;
         }
-        return keyHolder.getKey().longValue();
+        return num.longValue();
     }
 
     @Transactional
