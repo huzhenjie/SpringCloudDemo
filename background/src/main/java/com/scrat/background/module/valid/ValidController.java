@@ -16,6 +16,11 @@ public class ValidController {
 
     /**
      * curl -X POST -H 'Content-Type: application/json' -d '{"item_name": "This is ItemName"}' http://localhost:18001/valid/json
+     * curl -X POST -H 'Content-Type: application/json' -d '{"item_name": "This is ItemName", "email": "huzhenjie.dev@gmail.com"}' http://localhost:18001/valid/json
+     * curl -X POST -H 'Content-Type: application/json' -d '{"item_name": "This is ItemName", "email": "huzhenjie.dev@gmail.com", "items": null}' http://localhost:18001/valid/json
+     * curl -X POST -H 'Content-Type: application/json' -d '{"item_name": "This is ItemName", "email": "huzhenjie.dev@gmail.com", "items": [null]}' http://localhost:18001/valid/json
+     * curl -X POST -H 'Content-Type: application/json' -d '{"item_name": "This is ItemName", "email": "huzhenjie.dev@gmail.com", "items": [{"id":123}]}' http://localhost:18001/valid/json
+     * curl -X POST -H 'Content-Type: application/json' -d '{"item_name": "This is ItemName", "email": "huzhenjie.dev@gmail.com", "items": [{"id":123, "name": "Summer"}]}' http://localhost:18001/valid/json
      */
     @PostMapping("/valid/json")
     public Res<Object> testValid(@Valid @RequestBody ValidModel model) {

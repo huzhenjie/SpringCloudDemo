@@ -1,6 +1,8 @@
 package com.scrat.background.module.valid;
 
+import javax.validation.Valid;
 import javax.validation.constraints.*;
+import java.util.List;
 
 public class ValidModel {
     @Size(min = 2, max = 16, message = "item_name length must be between 2 and 16")
@@ -12,6 +14,9 @@ public class ValidModel {
     @Max(value = 100,message = "num must be less than 100")
     @Min(value = 1,message = "num must be bigger than 1")
     private Integer num;
+    @Valid
+    @NotEmpty(message = "items should not empty")
+    private List<ValidItemModel> items;
 
     public String getItemName() {
         return itemName;
@@ -40,12 +45,22 @@ public class ValidModel {
         return this;
     }
 
+    public List<ValidItemModel> getItems() {
+        return items;
+    }
+
+    public ValidModel setItems(List<ValidItemModel> items) {
+        this.items = items;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "ValidModel{" +
                 "itemName='" + itemName + '\'' +
                 ", email='" + email + '\'' +
                 ", num=" + num +
+                ", items=" + items +
                 '}';
     }
 }
