@@ -54,6 +54,7 @@ public class Res<T> {
         return "Res{" +
                 "status=" + status +
                 ", message='" + message + '\'' +
+                ", data=" + data +
                 '}';
     }
 }
