@@ -13,14 +13,17 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class DateUtil {
 
-    private static final Map<String, ThreadLocal<SimpleDateFormat>> dateLocalMap
+    private static final String[] SUPPORT_PATTERN = new String[]{"yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd"};
+
+    private static final Map<String, ThreadLocal<SimpleDateFormat>> DATE_LOCAL_MAP
             = new ConcurrentHashMap<String, ThreadLocal<SimpleDateFormat>>() {{
-        put("yyyy-MM-dd HH:mm:ss", ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")));
-        put("yyyy-MM-dd", ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyy-MM-dd")));
+                for (String pattern : SUPPORT_PATTERN) {
+                    put(pattern, ThreadLocal.withInitial(() -> new SimpleDateFormat(pattern)));
+                }
     }};
 
     public static String formatDate(Date date, String fmt) {
-        ThreadLocal<SimpleDateFormat> threadLocal = dateLocalMap.get(fmt);
+        ThreadLocal<SimpleDateFormat> threadLocal = DATE_LOCAL_MAP.get(fmt);
         if (threadLocal == null) {
             throw new IllegalArgumentException("The given pattern is invalid " + fmt);
         }
@@ -28,7 +31,7 @@ public class DateUtil {
     }
 
     public static Date parseDate(String dateStr, String fmt) throws ParseException {
-        ThreadLocal<SimpleDateFormat> threadLocal = dateLocalMap.get(fmt);
+        ThreadLocal<SimpleDateFormat> threadLocal = DATE_LOCAL_MAP.get(fmt);
         if (threadLocal == null) {
             throw new IllegalArgumentException("The given pattern is invalid " + fmt);
         }
