@@ -5,6 +5,7 @@
   * [MySQL](https://github.com/huzhenjie/SpringCloudDemo/tree/master/background/src/main/java/com/scrat/background/module/mysql)
   * [Redis](https://github.com/huzhenjie/SpringCloudDemo/tree/master/background/src/main/java/com/scrat/background/module/redis)
   * [RabbitMQ](https://github.com/huzhenjie/SpringCloudDemo/tree/master/background/src/main/java/com/scrat/background/module/queue)
+  * [i18n](https://github.com/huzhenjie/SpringCloudDemo/tree/master/background/src/main/java/com/scrat/background/module/i18n)
   * [@Async](https://github.com/huzhenjie/SpringCloudDemo/tree/master/background/src/main/java/com/scrat/background/module/async)
   * [@Valid](https://github.com/huzhenjie/SpringCloudDemo/tree/master/background/src/main/java/com/scrat/background/module/valid)
 
