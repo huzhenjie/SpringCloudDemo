@@ -8,6 +8,9 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jackson:
     property-naming-strategy: CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES # 请求参数下划线转驼峰命名
+  messages:
+    basename: i18n/messages
+    fallback-to-system-locale: false
   profiles:
     active: dev
   rabbitmq:
