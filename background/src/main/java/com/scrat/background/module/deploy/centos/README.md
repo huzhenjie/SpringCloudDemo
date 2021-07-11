@@ -15,6 +15,8 @@ sudo systemctl start nginx
 yum install java-latest-openjdk
 java --version
 
+yum install git
+
 wget http://repo.mysql.com/mysql80-community-release-el8.rpm
 rpm -ivh mysql80-community-release-el8.rpm
 yum update
