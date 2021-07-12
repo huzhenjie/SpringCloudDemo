@@ -42,6 +42,11 @@ public class BookModelDao {
         return num.longValue();
     }
 
+    public Long getTotalBook() {
+        String sql = "select count(1) from book";
+        return namedParameterJdbcTemplate.queryForObject(sql, new MapSqlParameterSource(), Long.class);
+    }
+
     @Transactional
     public List<Integer> addBookList(List<Book> bookList) {
         String sql = "insert ignore into book set book_name=:bookName,price=:price";
