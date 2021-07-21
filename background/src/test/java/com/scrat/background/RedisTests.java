@@ -17,19 +17,19 @@ public class RedisTests {
     @Test
     void testSetData() {
         String key = "TestKey";
-        baseRedis.setValue(key, new TestRedisData().setId(12345L).setName("Hello world"));
+        baseRedis.setValue(key, new TestRedisData().setId(12345L).setName("Hello world").setMoreProperties("More"));
         log.info("{}", baseRedis.getValue(key, TestRedisData.class));
-        baseRedis.setValue(key, "str");
-        log.info("{}", baseRedis.getValue(key, String.class));
-        baseRedis.setValue(key, 1);
-        log.info("{}", baseRedis.getValue(key, Integer.class));
-        baseRedis.setValue(key, 0.123456d);
-        log.info("{}", baseRedis.getValue(key, Double.class));
-        baseRedis.setValue(key, 0.56f);
-        log.info("{}", baseRedis.getValue(key, Float.class));
-        baseRedis.setValue(key, 1234567890L);
-        log.info("{}", baseRedis.getValue(key, Long.class));
-        log.info("{}", baseRedis.getValue("key not found", Long.class));
+//        baseRedis.setValue(key, "str");
+//        log.info("{}", baseRedis.getValue(key, String.class));
+//        baseRedis.setValue(key, 1);
+//        log.info("{}", baseRedis.getValue(key, Integer.class));
+//        baseRedis.setValue(key, 0.123456d);
+//        log.info("{}", baseRedis.getValue(key, Double.class));
+//        baseRedis.setValue(key, 0.56f);
+//        log.info("{}", baseRedis.getValue(key, Float.class));
+//        baseRedis.setValue(key, 1234567890L);
+//        log.info("{}", baseRedis.getValue(key, Long.class));
+//        log.info("{}", baseRedis.getValue("key not found", Long.class));
     }
 
     @Test

@@ -1,5 +1,6 @@
 package com.scrat.background.module.redis;
 
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,9 +13,11 @@ import java.util.concurrent.TimeUnit;
 public class BaseRedis {
     private static final Logger log = LoggerFactory.getLogger(BaseRedis.class.getName());
     private final RedisTemplate<String, Object> redisTemplate;
+    private final ObjectMapper objectMapper;
 
-    public BaseRedis(RedisTemplate<String, Object> redisTemplate) {
+    public BaseRedis(RedisTemplate<String, Object> redisTemplate, ObjectMapper objectMapper) {
         this.redisTemplate = redisTemplate;
+        this.objectMapper = objectMapper;
     }
 
     public void setValue(String key, Object obj) {
@@ -31,17 +34,45 @@ public class BaseRedis {
 
     public <T> T getValue(String key, Class<T> tClass, T defaultVal) {
         try {
-            ObjectMapper mapper = new ObjectMapper();
             Object obj = redisTemplate.opsForValue().get(key);
-            return mapper.convertValue(obj, tClass);
+            return objectMapper.convertValue(obj, tClass);
         } catch (Exception e) {
             log.error("convert redis val fail. key={} class={}", key, tClass, e);
             return defaultVal;
         }
     }
 
+    /**
+     * <pre>
+     *     JavaType javaType = mapper.getTypeFactory().constructParametricType(Res.class, Model.class);
+     * </pre>
+     * @param key Redis key
+     * @param javaType Return value type
+     * @param defaultVal Default value if not found in redis
+     * @param <T> Template
+     * @return Redis value
+     */
+    public <T> T getValue(String key, JavaType javaType, T defaultVal) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            Object obj = redisTemplate.opsForValue().get(key);
+            return mapper.convertValue(obj, javaType);
+        } catch (Exception e) {
+            log.error("convert redis val fail. key={} javaType={}", key, javaType, e);
+            return defaultVal;
+        }
+    }
+
     public void delete(String key) {
         redisTemplate.delete(key);
+    }
+
+    public boolean has(String key) {
+        Boolean hasKey = redisTemplate.hasKey(key);
+        if (hasKey == null) {
+            return false;
+        }
+        return hasKey;
     }
 
     // lock
