@@ -59,7 +59,7 @@ public class GlobalExceptionHandler {
     public Res<Object> paramExceptionHandler(ParamException e) {
         log.error(e.getMessage(), e);
         String msg = e.getMessage();
-        if (!StringUtils.hasText(msg)) {
+        if (!StringUtils.hasLength(msg)) {
             msg = "param error";
         }
         return Res.error(400, msg);
